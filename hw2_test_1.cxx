@@ -9,9 +9,13 @@
 
 int main() {
 	 int num = 5;
-	 long r = syscall(335); // get_weight
+	 int r = syscall(335); // get_weight
 	 std::cout << "get_weight returned " << r << std::endl;
 	 assert(r == 0);
+	 
+	 r = syscall(334, -num); // set_weight
+	 std::cout << "set_weight returned " << r << std::endl;
+	 assert(r == -1);
 	 
 	 r = syscall(334, num); // set_weight
 	 std::cout << "set_weight set to " << num << std::endl;
@@ -24,7 +28,7 @@ int main() {
 	 
 	 r = syscall(336);
 	 std::cout << "get_leaf_children_sum returned " << r << std::endl;
-	 assert(r == 5);
+	 assert(r == -ECHILD);
 	 
 	 pid_t child1_pid;
 	 pid_t child2_pid;
@@ -34,14 +38,14 @@ int main() {
 	 if(child1_pid != 0){
 		 r = syscall(336); // get_leaf_children_sum
 		 std::cout << "get_leaf_children_sum returned " << r << std::endl;
-		 assert(r == 10);
+		 assert(r == 5);
 		 wait(NULL);
 	 }
 	 else{
 		 sleep(1);
 		 r = syscall(336); // get_leaf_children_sum
 		 std::cout << "get_leaf_children_sum returned " << r << std::endl;
-		 assert(r == 5);
+		 assert(r == -ECHILD);
 		 exit(0);
 	 }
 	 
