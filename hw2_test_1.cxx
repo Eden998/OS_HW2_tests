@@ -86,5 +86,7 @@ int main() {
 	 std::cout << "get_heaviest_ancestor returned " << heaviest << std::endl;
 	 assert(heaviest == *heaviest_pid_pointer);
 	 shm_unlink("HEAVIEST_PID");
+	 
+	 std::cout << "=========SUCCESS=========" << std::endl;
 	 return 0;
 }
