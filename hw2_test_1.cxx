@@ -28,7 +28,7 @@ int main() {
 	 
 	 r = syscall(336);
 	 std::cout << "get_leaf_children_sum returned " << r << std::endl;
-	 assert(r == -ECHILD);
+	 assert(r == -1);
 	 
 	 pid_t child1_pid;
 	 pid_t child2_pid;
@@ -45,7 +45,7 @@ int main() {
 		 sleep(1);
 		 r = syscall(336); // get_leaf_children_sum
 		 std::cout << "get_leaf_children_sum returned " << r << std::endl;
-		 assert(r == -ECHILD);
+		 assert(r == -1);
 		 exit(0);
 	 }
 	 
